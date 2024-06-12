@@ -1,0 +1,26 @@
+## Docker File to Test Local
+version: '3.4'
+
+services:
+  # minimal.api:
+  #   image: ${DOCKER_REGISTRY-}minimal.api
+  #   build:
+  #     context: .
+  #     dockerfile: src/WebUI/MinimalApi/Dockerfile
+  #   depends_on:
+  #    - postgresql
+
+  postgresql:
+    image: postgres
+    container_name: postgres-minimal-api
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./vlm-minimal-api/postgres:/var/lib/postgresql/data
+
+volumes:
+  vlm-minimal-api:
